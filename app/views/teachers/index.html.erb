@@ -1,0 +1,29 @@
+<% content_for :page_title, 'Profesores'%>
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<h1>Docentes</h1>
+<h3>Bienvenido <%= current_teacher.name %> <%= current_teacher.surname %></h3>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= teacher.name %></td>
+        <td><%= link_to 'Mostrar Informacion', teacher %></td>
+        <td><%= link_to 'Editar Informacion', edit_teacher_path(teacher) %></td>
+       <!-- <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Teacher', new_teacher_path %>
+</div>

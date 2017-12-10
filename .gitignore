@@ -20,3 +20,4 @@ rails g model Docente nombre:string{20} apellido:string{30} usuario:string{15} m
 
 # Ignore application configuration
 /config/application.yml
+/app/assets/images

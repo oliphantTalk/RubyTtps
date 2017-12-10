@@ -1,0 +1,21 @@
+<% content_for :page_title, 'Iniciar Sesion' %>
+<h2>Iniciar Sesion</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'panel panel-default'}) do |f| %>
+
+  <div class="panel-heading">Ingresa tus datos para iniciar sesion</div>
+
+  <div class="form-inputs panel-body">
+    <%= f.input :email, required: false, autofocus: true, label: 'Email / Usuario'%>
+    <%= f.input :password, required: false, label: 'Contraseña' %>
+    <%= f.input :remember_me, label: 'Recordarme', as: :boolean if devise_mapping.rememberable?%>
+  </div>
+
+  <div class="form-actions panel-footer">
+    <%= f.button :submit , "Continuar", class: 'btn btn-primary' %>
+
+
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

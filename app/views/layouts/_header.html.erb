@@ -1,0 +1,43 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><%= image_tag 'vaskon.jpg', class: "menu_icon", size: '50x50'%></li>
+                <li><%= image_tag 'sicilia.png', class: "menu_icon", size: '50x50'%></li>
+                <li class="h3 navbar-text text-center"> Sistema de nada</li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to "Inicio", page_path('home') %></li>
+                <li><%= link_to "Acerca de", page_path('about')%></li>
+                <% if teacher_signed_in? %>
+
+
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_teacher.name %>
+                    <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-header">Opciones</li>
+                    <li><%= link_to("Mi perfil", teacher_root_path) %></li>
+                    <li><%= link_to("Ver Materias", subjects_path)%></li>
+                    <li class="divider"></li>
+                    <li>
+                      <%= link_to('Cerrar Sesion', destroy_teacher_session_path, method: :delete) %>
+                    </li>
+                  </ul>
+                </li>
+
+
+                <% else %>
+                <li >
+
+                    <%= link_to('Registrarse', new_teacher_registration_path)  %>
+                </li>
+                <li >
+                    <%= link_to('Iniciar Sesion', new_teacher_session_path)  %>
+                </li>
+                <% end %>
+            </ul>
+        </nav>
+    </div>
+</header>

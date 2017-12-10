@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  date: 2017-12-05
+  min_score: 1
+  amount: 1
+  course: one
+
+two:
+  title: MyString
+  date: 2017-12-05
+  min_score: 1
+  amount: 1
+  course: two
