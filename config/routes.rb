@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get '/teachers' => 'teachers#index', as: :teacher_root # creates user_root_path
+  get '/admins' => 'admins#index', as: :admin_root # creates user_root_path
+  get 'teachers/:id/miscursos' => 'teachers#my_courses', as: :my_courses
+
   devise_for :admins
   devise_for :teachers
   resources :evaluations
@@ -6,10 +10,9 @@ Rails.application.routes.draw do
   resources :courses
   resources :subjects
   resources :admins
-  resources :teachers
-
-  get '/teachers' => 'teachers#index', as: :teacher_root # creates user_root_path
-  get '/admins' => 'admins#index', as: :admin_root # creates user_root_path
+  resources :teachers do
+    resources :courses
+  end
 
 
 

@@ -18,7 +18,7 @@
                     <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li class="dropdown-header">Opciones</li>
-                    <li><%= link_to("Mi perfil", teacher_root_path) %></li>
+                    <li><%= link_to("Mi perfil", teacher_path(current_teacher)) %></li>
                     <li><%= link_to("Ver Materias", subjects_path)%></li>
                     <li class="divider"></li>
                     <li>

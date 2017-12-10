@@ -61,6 +61,7 @@ class CoursesController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
@@ -69,6 +70,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.fetch(:course, {})
+      params.fetch(:course, {}).permit(:year, :subject_id)
     end
 end

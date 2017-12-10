@@ -1,10 +1,15 @@
-<%= simple_form_for(@course) do |f| %>
+<%= simple_form_for(@course, html: {class: 'panel panel-default'}) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-  </div>
+  <div class="form-inputs panel-heading">Crear nuevo curso</div>
+  <div class="form-inputs panel-body">
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.input :year, required: true, label: "Año",input_html:{min: year_ago(1), max: year_coming(2) }%>
+    <%= f.association :subject, label: "Materia" %>
+
+
+  </div>
+  <div class="form-actions panel-footer">
+    <%= f.button :submit, "Crear curso", class: 'btn btn-success' %>
   </div>
 <% end %>

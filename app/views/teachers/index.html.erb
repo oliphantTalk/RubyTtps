@@ -4,10 +4,13 @@
 
 <h1>Docentes</h1>
 <h3>Bienvenido <%= current_teacher.name %> <%= current_teacher.surname %></h3>
-<table>
-  <thead>
+<table class="table table-hover table-bordered">
+  <thead >
     <tr>
-      <th colspan="3"></th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Mail</th>
+      <th colspan="3">Opciones</th>
     </tr>
   </thead>
 
@@ -15,15 +18,17 @@
     <% @teachers.each do |teacher| %>
       <tr>
         <td><%= teacher.name %></td>
+        <td><%= teacher.surname %></td>
+        <td><%= teacher.email %></td>
         <td><%= link_to 'Mostrar Informacion', teacher %></td>
         <td><%= link_to 'Editar Informacion', edit_teacher_path(teacher) %></td>
-       <!-- <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+        <td><%= link_to 'Cursos Asignados', my_courses_path(teacher) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Teacher', new_teacher_path %>
+  <div class="btn-group btn-group-sm">
+<%= link_to 'Nuevo Docente', new_teacher_path, class: 'btn btn-info' %>
 </div>

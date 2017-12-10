@@ -1,0 +1,26 @@
+<%= content_for :page_title, "Mis Cursos"%>
+<p id="notice"><%= notice %></p>
+
+<table class="table table-hover table-bordered">
+  <caption>Mis Cursos</caption>
+  <thead >
+  <tr>
+    <th>Nombre</th>
+    <th>Año</th>
+    <th>Fecha asignacion</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @misCursos.each do |c| %>
+  <tr>
+    <td><%= link_to c.subject.name, course_path(c) %></td>
+    <td><%= c.year %></td>
+    <td><%= c.created_at.strftime('%b %m %Y') %></td>
+      <% end %>
+  </tr>
+  </tbody>
+</table>
+<div class="btn-group btn-group-sm">
+    <%= link_to 'Atrás', teachers_path, class: 'btn btn-danger' %>
+</div>
