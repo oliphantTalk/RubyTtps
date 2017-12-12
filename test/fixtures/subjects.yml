@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: 'Ruby'
   year: 1
-  detail: MyText
+  detail: 'Una materia'
 
 two:
-  name: MyString
-  year: 1
-  detail: MyText
+  name: 'Ruby2'
+  year: 11
+  detail: 'Otra materia'
