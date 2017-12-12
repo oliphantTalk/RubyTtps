@@ -61,6 +61,13 @@ class CoursesController < ApplicationController
     end
   end
 
+  def my_students
+
+  end
+
+  def my_teachers
+
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
