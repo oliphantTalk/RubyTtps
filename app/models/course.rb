@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
   belongs_to :subject
-  has_and_belongs_to_many :students
+  has_many :course_students
+  has_many :students, through: :course_students
   has_and_belongs_to_many :teachers
   has_many :evaluations
 

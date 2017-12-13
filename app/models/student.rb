@@ -1,7 +1,11 @@
 class Student < ApplicationRecord
   has_and_belongs_to_many :evaluations
-  has_and_belongs_to_many :courses
+  has_many :course_students
+  has_many :courses, through: :course_students
+  accepts_nested_attributes_for :courses
+
   before_save { self.email = email.downcase }
+
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :name, presence: true
@@ -11,5 +15,6 @@ class Student < ApplicationRecord
                                              :message => 'El mail debe ser del tipo "ejemplo1234@abc.com"'},
                                             uniqueness: {case_sensitive: false}
   validates :legajo, presence: true, uniqueness: true
+
 
 end

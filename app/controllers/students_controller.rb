@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+
   end
 
   # GET /students/1/edit
@@ -28,6 +29,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
+    #    Course.find(params[:course_id]).students << @student
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
@@ -70,6 +72,6 @@ class StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.fetch(:student, {})
-      params.require(:student).permit(:name, :surname, :dni, :legajo, :email)
+      params.require(:student).permit(:name, :surname, :dni, :legajo, :email, :course_ids)
     end
 end

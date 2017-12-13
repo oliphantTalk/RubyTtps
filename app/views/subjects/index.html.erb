@@ -8,10 +8,7 @@
       <th >Nombre</th>
       <th >Año(plan)</th>
       <th >Descripcion</th>
-      <th>Cursos <%= link_to new_course_path do %>
-          <i class="glyphicon glyphicon-plus">(agregar)</i>
-        <% end %>
-      </th>
+      <th>Cursos</th>
       <th colspan="2">Opciones</th>
     </tr>
   </thead>
@@ -23,9 +20,16 @@
         <td><%= subject.year %></td>
         <td><%= subject.detail %></td>
 
-        <td><table><% subject.courses.each do |course| %>
-            <tr><td><%=link_to course.year, course_path(course) %></td></tr>
+        <td>
+          <table><% subject.courses.each do |course| %>
+            <tr>
+              <td><%=link_to course.year, course_path(course) %></td>
+            </tr>
           <% end %>
+            <tr>
+              <td><%= link_to '', new_subject_course_path(subject) ,class: 'glyphicon glyphicon-plus'%>
+              </td>
+            </tr>
         </table></td>
 
 

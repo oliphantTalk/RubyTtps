@@ -5,7 +5,12 @@
   <div class="form-inputs panel-body">
 
     <%= f.input :year, required: true, label: "Año",input_html:{min: year_ago(1), max: year_coming(2) }%>
-    <%= f.association :subject, label: "Materia" %>
+    <%= if params[:subject_id].present?
+          f.association :subject, label: "Materia", selected: params[:subject_id], disabled: true
+        else
+          f.association :subject, label: "Materia"
+        end
+    %>
 
 
   </div>

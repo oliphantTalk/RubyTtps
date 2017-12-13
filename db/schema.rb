@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171209043231) do
+ActiveRecord::Schema.define(version: 20171213002230) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -33,19 +33,22 @@ ActiveRecord::Schema.define(version: 20171209043231) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "course_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "course_id"
+    t.bigint "student_id"
+    t.string "status", default: "En curso"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_students_on_course_id"
+    t.index ["student_id"], name: "index_course_students_on_student_id"
+  end
+
   create_table "courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "year"
     t.bigint "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_courses_on_subject_id"
-  end
-
-  create_table "courses_students", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "course_id", null: false
-    t.bigint "student_id", null: false
-    t.string "status"
-    t.index ["course_id", "student_id"], name: "index_courses_students_on_course_id_and_student_id"
   end
 
   create_table "courses_teachers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -118,6 +121,8 @@ ActiveRecord::Schema.define(version: 20171209043231) do
     t.index ["username"], name: "index_teachers_on_username", unique: true
   end
 
+  add_foreign_key "course_students", "courses"
+  add_foreign_key "course_students", "students"
   add_foreign_key "courses", "subjects"
   add_foreign_key "evaluations", "courses"
 end

@@ -7,8 +7,7 @@
     <%= f.input :dni, label: 'DNI', class: 'form-group' %>
     <%= f.input :email, placeholder: 'mail@mail.com', class: 'form-group'%>
     <%= f.input :legajo, class: 'form-group' %>
-
-
+    <%= f.input :course_ids, :as => :hidden, class: 'form-group', :input_html => { :value => params[:course_id]} %>
   </div>
 
   <div class="form-actions form-inline">

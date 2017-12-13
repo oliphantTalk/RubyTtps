@@ -22,7 +22,7 @@
         <li><%= link_to("Ver Docentes", teacher_path(current_teacher)) %></li>
         <li><%= link_to("Ver Alumnos", teacher_path(current_teacher)) %></li>
         <li><%= link_to("Ver Evaluaciones", subjects_path)%></li>
-        <li><%= link_to("Agregar Alumnos al curso", subjects_path)%></li>
+        <li><%= link_to("Agregar Alumnos al curso", new_course_student_path(@course))%></li>
         <li><%= link_to("Agregar Evaluaciones al curso", subjects_path)%></li>
         <li class="divider"></li>
         <li>
