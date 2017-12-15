@@ -1,11 +1,29 @@
 <p id="notice"><%= notice %></p>
+<table class="table table-hover table-bordered">
+  <thead>
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Mail</th>
+    <th>Legajo</th>
+    <th>Dni</th>
+    <th colspan="5">Opciones</th>
+  </tr>
+  </thead>
 
-<%= @student.name %>
-<%= @student.surname %>
-<%= @student.email %>
-<%= @student.dni %>
-<%= @student.legajo %>
+  <tbody>
+    <tr>
+      <td><%= @student.name %></td>
+      <td><%= @student.surname %></td>
+      <td><%= @student.email %></td>
+      <td><%= @student.legajo %></td>
+      <td><%= @student.dni %></td>
+      <td><%= link_to 'Editar', edit_student_path(@student), class: 'glyphicon glyphicon-pencil'%></td>
+      <td><%= link_to 'Eliminar!', @student, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'text text-danger glyphicon glyphicon-trash' %></td>
+    </tr>
+  </tbody>
+</table>
 
-
-<%= link_to 'Editar', edit_student_path(@student) %> |
-<%= link_to 'Volver', students_path %>
+<div class="btn-group btn-group-sm">
+  <%= link_to 'Volver', students_path, class: 'btn btn-danger' %>
+</div>

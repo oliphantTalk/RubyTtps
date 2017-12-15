@@ -1,4 +1,27 @@
 <p id="notice"><%= notice %></p>
+<table class="table table-hover table-bordered">
+  <thead>
+  <tr>
+    <th>Titulo</th>
+    <th>Fecha</th>
+    <th>Puntaje de Aprobación</th>
+    <th>Curso</th>
+    <th colspan="5">Opciones</th>
+  </tr>
+  </thead>
 
-<%= link_to 'Edit', edit_evaluation_path(@evaluation) %> |
-<%= link_to 'Back', evaluations_path %>
+  <tbody>
+  <tr>
+    <td><%= @evaluation.title %></td>
+    <td><%= @evaluation.date %></td>
+    <td><%= @evaluation.min_score %></td>
+    <td><%= @evaluation.course %></td>
+    <td><%= link_to 'Editar', edit_evaluation_path(@evaluation), class: 'glyphicon glyphicon-pencil'%></td>
+    <td><%= link_to 'Eliminar!', @evaluation, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'text text-danger glyphicon glyphicon-trash' %></td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="btn-group btn-group-sm">
+  <%= link_to 'Volver', courses_path, class: 'btn btn-danger' %>
+</div>

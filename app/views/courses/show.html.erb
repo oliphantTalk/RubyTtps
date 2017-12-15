@@ -9,7 +9,7 @@
   </thead>
 
   <tbody>
-  <tr>
+  <li>
     <td><%= @course.subject.name %></td>
     <td><%= @course.year %></td>
 
@@ -19,14 +19,18 @@
         <span class="caret"></span></a>
       <ul class="dropdown-menu">
         <li class="dropdown-header">Opciones</li>
-        <li><%= link_to("Ver Docentes", teacher_path(current_teacher)) %></li>
-        <li><%= link_to("Ver Alumnos", teacher_path(current_teacher)) %></li>
-        <li><%= link_to("Ver Evaluaciones", subjects_path)%></li>
+        <li><%= link_to("Ver Docentes", course_teachers_path(@course)) %></li>
+        <li><%= link_to("Ver Alumnos", course_students_path(@course)) %></li>
+        <li><%= link_to("Ver Evaluaciones", course_evaluations_path(@course))%></li>
         <li><%= link_to("Agregar Alumnos al curso", new_course_student_path(@course))%></li>
-        <li><%= link_to("Agregar Evaluaciones al curso", subjects_path)%></li>
-        <li class="divider"></li>
+        <li><%= link_to("Agregar Evaluaciones al curso", new_course_evaluation_path(@course))%></li>
+
+    <li class="divider"></li>
         <li>
-          <%= link_to('Editar Curso', destroy_teacher_session_path, method: :delete) %>
+          <%= link_to 'Editar Curso', edit_course_path(@course) %>
+        </li>
+        <li>
+          <%= link_to 'Eliminar', @course, method: :delete, data: { confirm: '¿Estas seguro?' } %>
         </li>
       </ul>
     </li>
@@ -35,8 +39,7 @@
 
 
 
-    <td><%= link_to 'Editar', edit_course_path(@course) %></td>
-    <td><%= link_to 'Eliminar', @course, method: :delete, data: { confirm: '¿Estas seguro?' } %></td>
+
     </td>
 
 

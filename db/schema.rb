@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171213002230) do
+ActiveRecord::Schema.define(version: 20171213225413) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20171213002230) do
   create_table "course_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "course_id"
     t.bigint "student_id"
-    t.string "status", default: "En curso"
+    t.string "status", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_course_students_on_course_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20171213002230) do
     t.bigint "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number_of_evaluation", default: 3
     t.index ["subject_id"], name: "index_courses_on_subject_id"
   end
 
@@ -61,7 +62,6 @@ ActiveRecord::Schema.define(version: 20171213002230) do
     t.string "title"
     t.date "date"
     t.integer "min_score"
-    t.integer "amount"
     t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -121,8 +121,6 @@ ActiveRecord::Schema.define(version: 20171213002230) do
     t.index ["username"], name: "index_teachers_on_username", unique: true
   end
 
-  add_foreign_key "course_students", "courses"
-  add_foreign_key "course_students", "students"
   add_foreign_key "courses", "subjects"
   add_foreign_key "evaluations", "courses"
 end

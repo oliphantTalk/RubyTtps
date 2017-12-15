@@ -6,20 +6,22 @@
   <thead>
   <tr>
     <th>Nombre materia</th>
-    <th>Año(Plan)</th>
-    <th colspan="5">Opciones</th>
+    <th>Año(Plan Materia)</th>
+    <th>Año(Cursada)</th>
+    <th colspan="6">Opciones</th>
   </tr>
   </thead>
 
   <tbody>
-  <% @courses.each do |course| %>
+
+  <% courses_order_by_name.each do |course| %>
     <tr>
-      <td><%= course.subject.name %></td>
-      <td><%= course.year %></td>
+      <td><%= course.name %></td>
+      <td><%= course.plan %></td>
+      <td><%= course.anio %></td>
       <td><%= link_to "Ver docentes", course_teachers_path(course) %></td>
       <td><%= link_to "Ver alumnos", course_students_path(course) %></td>
-      <td><%= link_to "Ver alumnos", new_course_student_path(course) %></td>
-      <td><%= link_to 'Mostrar', course, class: 'glyphicon glyphicon-zoom-in' %></td>
+      <td><%= link_to 'Mostrar', course_path(course), class: 'glyphicon glyphicon-zoom-in' %></td>
       <td><%= link_to 'Editar', edit_course_path(course), class: 'glyphicon glyphicon-pencil'%></td>
       <td><%= link_to 'Eliminar!', course, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'text text-danger glyphicon glyphicon-trash' %></td>
     </tr>

@@ -2,7 +2,8 @@ class Student < ApplicationRecord
   has_and_belongs_to_many :evaluations
   has_many :course_students
   has_many :courses, through: :course_students
-  accepts_nested_attributes_for :courses
+
+#  accepts_nested_attributes_for :courses
 
   before_save { self.email = email.downcase }
 
@@ -15,6 +16,6 @@ class Student < ApplicationRecord
                                              :message => 'El mail debe ser del tipo "ejemplo1234@abc.com"'},
                                             uniqueness: {case_sensitive: false}
   validates :legajo, presence: true, uniqueness: true
-
+  validates_associated :courses
 
 end

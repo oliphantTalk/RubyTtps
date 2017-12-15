@@ -6,11 +6,11 @@ Rails.application.routes.draw do
   resources :evaluations
   resources :students
   resources :subjects
-  resources :admins
-
+  #resources :course_students
   resources :courses do
     resources :students
     resources :teachers
+    resources :evaluations
 
   end
 

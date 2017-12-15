@@ -4,7 +4,8 @@ class EvaluationsController < ApplicationController
   # GET /evaluations
   # GET /evaluations.json
   def index
-    @evaluations = Evaluation.all
+    #@evaluations = Evaluation.all
+    @evaluations = Course.find(params[:course_id]).evaluations
   end
 
   # GET /evaluations/1
@@ -24,6 +25,7 @@ class EvaluationsController < ApplicationController
   # POST /evaluations
   # POST /evaluations.json
   def create
+
     @evaluation = Evaluation.new(evaluation_params)
 
     respond_to do |format|

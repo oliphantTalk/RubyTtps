@@ -4,18 +4,23 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    if params.present?
+#      @students = students_from_course(params[:course_id])
+    @students = Course.find(params[:course_id]).students
+    else
+      @students = Student.all
+    end
   end
 
-  # GET /students/1
+  # GET /stu
+  # dents/1
   # GET /students/1.json
   def show
   end
 
   # GET /students/new
   def new
-    @student = Student.new
-
+    @student = Course.find(params[:course_id]).students.new
   end
 
   # GET /students/1/edit

@@ -4,7 +4,11 @@ class TeachersController < ApplicationController
   # GET /teachers
   # GET /teachers.json
   def index
-    @teachers = Teacher.all
+    if params.present?
+      @teachers = Course.find(params[:course_id]).teachers
+    else
+      @teachers = Teacher.all
+    end
   end
 
   # GET /teachers/1
