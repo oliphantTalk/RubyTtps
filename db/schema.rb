@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171213225413) do
+ActiveRecord::Schema.define(version: 20171217030514) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 20171213225413) do
     t.index ["course_id", "teacher_id"], name: "index_courses_teachers_on_course_id_and_teacher_id"
   end
 
+  create_table "evaluation_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "evaluation_id"
+    t.bigint "student_id"
+    t.date "date"
+    t.string "instance"
+    t.string "score", default: "Ausente"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluation_id"], name: "index_evaluation_students_on_evaluation_id"
+    t.index ["student_id"], name: "index_evaluation_students_on_student_id"
+  end
+
   create_table "evaluations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.date "date"
@@ -66,15 +78,6 @@ ActiveRecord::Schema.define(version: 20171213225413) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_evaluations_on_course_id"
-  end
-
-  create_table "evaluations_students", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "Evaluation_id", null: false
-    t.bigint "Student_id", null: false
-    t.date "date"
-    t.string "instance"
-    t.string "score", default: "Ausente"
-    t.index ["Evaluation_id", "Student_id"], name: "index_Evaluations_Students_on_evaluation_id_and_student_id"
   end
 
   create_table "students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

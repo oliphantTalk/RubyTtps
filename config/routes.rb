@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   get 'teachers/:id/miscursos' => 'teachers#my_courses', as: :my_courses
 
   devise_for :teachers
-  resources :evaluations
+
+  resources :evaluations do
+    resources :students
+  end
+
   resources :students
   resources :subjects
   #resources :course_students

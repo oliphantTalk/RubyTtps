@@ -7,11 +7,11 @@
     <%= f.input :dni, label: 'DNI', class: 'form-group' %>
     <%= f.input :email, placeholder: 'mail@mail.com', class: 'form-group'%>
     <%= f.input :legajo, class: 'form-group' %>
-    <%= f.input :course_ids, :as => :hidden, class: 'form-group', :input_html => { :value => params[:course_id]} %>
+    <%= f.input :course_ids, :as => :hidden, class: 'form-group', :input_html => { disabled:true, :value => params[:course_id]} %>
   </div>
 
   <div class="form-actions form-inline">
-    <%= f.submit 'Agregar estudiante', class: 'btn btn-info' %>
+    <%= f.submit 'Aceptar', class: 'btn btn-info' %>
     <%= link_to 'Atrás', students_path, class: 'btn btn-danger' %>
 
   </div>

@@ -1,7 +1,11 @@
 class Student < ApplicationRecord
-  has_and_belongs_to_many :evaluations
+  #has_and_belongs_to_many :evaluations
   has_many :course_students
   has_many :courses, through: :course_students
+  has_many :evaluation_students
+  has_many :evaluations, through: :evaluation_students
+
+
 
 #  accepts_nested_attributes_for :courses
 

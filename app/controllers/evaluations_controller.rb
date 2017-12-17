@@ -5,7 +5,10 @@ class EvaluationsController < ApplicationController
   # GET /evaluations.json
   def index
     #@evaluations = Evaluation.all
-    @evaluations = Course.find(params[:course_id]).evaluations
+    if params[:course_id].present?
+      @evaluations = Course.find(params[:course_id]).evaluations
+    end
+      @evaluations = Evaluation.all
   end
 
   # GET /evaluations/1
@@ -16,10 +19,12 @@ class EvaluationsController < ApplicationController
   # GET /evaluations/new
   def new
     @evaluation = Evaluation.new
+
   end
 
   # GET /evaluations/1/edit
   def edit
+    params[:course_id] = @evaluation.course_id
   end
 
   # POST /evaluations
@@ -30,7 +35,7 @@ class EvaluationsController < ApplicationController
 
     respond_to do |format|
       if @evaluation.save
-        format.html { redirect_to @evaluation, notice: 'Evaluation was successfully created.' }
+        format.html { redirect_to @evaluation, notice: 'Se ha creado correctamente' }
         format.json { render :show, status: :created, location: @evaluation }
       else
         format.html { render :new }
@@ -72,5 +77,6 @@ class EvaluationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def evaluation_params
       params.fetch(:evaluation, {})
+      params.require(:evaluation).permit(:title, :date, :course_id, :min_score)
     end
 end

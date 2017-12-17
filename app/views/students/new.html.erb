@@ -1,4 +1,7 @@
-<h1>Agregar Nuevo Estudiante</h1>
-
+<% if params[:course_id].present? %>
+<h1>Agregar Nuevo Estudiante a <%= course_name_by_id(params[:course_id])%></h1>
+<% else %>
+  <h1>Agregar Nuevo Estudiante</h1>
+  <% end %>
 <%= render 'form', student: @student %>
 

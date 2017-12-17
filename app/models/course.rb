@@ -5,7 +5,7 @@ class Course < ApplicationRecord
   has_and_belongs_to_many :teachers
   has_many :evaluations
 
-
+  accepts_nested_attributes_for :subject
   #ver validates_associated :clase_asociada
   validates :year, presence: true, numericality: true
 ####pensar si quiero limitar el numero de examenes que un curso puede tener.

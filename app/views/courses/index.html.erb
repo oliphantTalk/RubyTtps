@@ -21,7 +21,7 @@
       <td><%= course.anio %></td>
       <td><%= link_to "Ver docentes", course_teachers_path(course) %></td>
       <td><%= link_to "Ver alumnos", course_students_path(course) %></td>
-      <td><%= link_to 'Mostrar', course_path(course), class: 'glyphicon glyphicon-zoom-in' %></td>
+      <td><%= link_to "Más", course_path(course), class: 'glyphicon glyphicon-zoom-in' %></td>
       <td><%= link_to 'Editar', edit_course_path(course), class: 'glyphicon glyphicon-pencil'%></td>
       <td><%= link_to 'Eliminar!', course, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'text text-danger glyphicon glyphicon-trash' %></td>
     </tr>

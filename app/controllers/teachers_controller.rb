@@ -4,7 +4,7 @@ class TeachersController < ApplicationController
   # GET /teachers
   # GET /teachers.json
   def index
-    if params.present?
+    if params[:course_id].present?
       @teachers = Course.find(params[:course_id]).teachers
     else
       @teachers = Teacher.all
