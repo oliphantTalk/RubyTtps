@@ -17,8 +17,9 @@
     <td><%= evaluation.date %></td>
     <td><%= evaluation.min_score %></td>
     <td><%= evaluation.course.subject.name %></td>
-    <td><%= link_to 'Inscribir Alumnos', evaluation_students_path(evaluation)%></td>
-    <td><%= link_to 'Ver inscriptos'%></td>
+    <td><%= link_to 'Inscribir Alumnos', evaluation_students_path(evaluation) %></td>
+    <td><%= link_to 'Ver inscriptos', index_evaluation_students_path(evaluation)%></td>
+
     <td><%= link_to 'Calificar'%></td>
     <td><%= link_to 'Editar', edit_evaluation_path(evaluation), class: 'glyphicon glyphicon-pencil'%></td>
     <td><%= link_to 'Eliminar!', evaluation, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'text text-danger glyphicon glyphicon-trash' %></td>

@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Estudiantes</h1>
+<h1>Estudiantes Inscriptos</h1>
+
+<h3>Examen <%= evaluation_info(@evaluation) %></h3>
 
 <table class="table table-hover table-bordered">
   <thead>
@@ -8,6 +10,8 @@
     <th>Nombre</th>
     <th>Apellido</th>
     <th>Legajo</th>
+    <th>Dni</th>
+    <th>Nota</th>
     <th colspan="5">Opciones</th>
   </tr>
   </thead>
@@ -18,13 +22,9 @@
       <td><%= student.name %></td>
       <td><%= student.surname %></td>
       <td><%= student.legajo %></td>
-      <% if params[:evaluation_id].present? %>
-        <td><%= link_to 'Inscribir', new_evaluation_add_student_path(params[:evaluation_id], student), class: 'glyphicon glyphicon-plus' %></td>
-      <% else %>
-        <td><%= link_to 'Mostrar', student, class: 'glyphicon glyphicon-zoom-in' %></td>
-      <% end %>
-      <td><%= link_to 'Editar', edit_student_path(student), class: 'glyphicon glyphicon-pencil'%></td>
-      <td><%= link_to 'Eliminar!', student, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'text text-danger glyphicon glyphicon-trash' %></td>
+      <td><%= student.dni %></td>
+      <td><%= student.evaluation_students.first.score %></td>
+      <td><%= link_to "Calificar" %></td>
     </tr>
   <% end %>
   </tbody>

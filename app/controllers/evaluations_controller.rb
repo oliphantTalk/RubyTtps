@@ -8,7 +8,6 @@ class EvaluationsController < ApplicationController
     if params[:course_id].present?
       @evaluations = Course.find(params[:course_id]).evaluations
     end
-      @evaluations = Evaluation.all
   end
 
   # GET /evaluations/1
@@ -38,7 +37,9 @@ class EvaluationsController < ApplicationController
         format.html { redirect_to @evaluation, notice: 'Se ha creado correctamente' }
         format.json { render :show, status: :created, location: @evaluation }
       else
-        format.html { render :new }
+        params[:course_id] = params[:evaluation][:course_id]
+        format.html { render :new, :params => params[:course_id] }
+        #format.html { redirect_to(new_course_evaluation_path(params[:evaluation][:course_id])) }
         format.json { render json: @evaluation.errors, status: :unprocessable_entity }
       end
     end

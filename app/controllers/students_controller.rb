@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :set_student, only: [:add_student_to_evaluation, :show, :edit, :update, :destroy]
 
   # GET /students
   # GET /students.json
@@ -7,6 +7,10 @@ class StudentsController < ApplicationController
     if params[:course_id].present?
 #      @students = students_from_course(params[:course_id])
     @students = Course.find(params[:course_id]).students.order(:surname, :name)
+    elsif params[:evaluation_id].present?
+          @evaluation = Evaluation.find(params[:evaluation_id])
+          @course = @evaluation.course
+          @students = @course.students
     else
       @students = Student.all.order(:surname, :name)
     end
@@ -22,10 +26,34 @@ class StudentsController < ApplicationController
   def new
     if params[:course_id].present?
       @student = Course.find(params[:course_id]).students.new
+
     else
       @student = Student.new
     end
   end
+
+  def add_student_to_evaluation
+    if params[:evaluation_id].present?
+      @evaluation = Evaluation.find(params[:evaluation_id])
+      @evaluation.students << @student
+      respond_to do |format|
+        if @evaluation.save
+          format.html { redirect_to evaluation_path(@evaluation), notice: 'Se ha inscripto correctamente.' }
+          #format.json { render :show, status: :created, location: @student }
+        else
+          format.html { render :new }
+          format.json { render json: @student.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
+  def index_evaluation_students
+    @evaluation = Evaluation.find(params[:evaluation_id])
+    @students = @evaluation.students
+    render 'students/enrolled'
+  end
+
 
   # GET /students/1/edit
   def edit
