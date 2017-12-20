@@ -10,28 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171217030514) do
-
-  create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "username"
-    t.string "name"
-    t.string "surname"
-    t.integer "dni"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
-  end
+ActiveRecord::Schema.define(version: 20171220184010) do
 
   create_table "course_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "course_id"
@@ -66,6 +45,8 @@ ActiveRecord::Schema.define(version: 20171217030514) do
     t.string "score", default: "Ausente"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "comment"
+    t.index ["evaluation_id", "student_id"], name: "index_evaluation_students_on_evaluation_id_and_student_id", unique: true
     t.index ["evaluation_id"], name: "index_evaluation_students_on_evaluation_id"
     t.index ["student_id"], name: "index_evaluation_students_on_student_id"
   end

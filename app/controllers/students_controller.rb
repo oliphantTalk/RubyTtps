@@ -28,8 +28,10 @@ class StudentsController < ApplicationController
       @student = Course.find(params[:course_id]).students.new
 
     else
-      @student = Student.new
+      @student = Student.build
+      @student.evaluation_students.build
     end
+
   end
 
   def add_student_to_evaluation
@@ -51,7 +53,15 @@ class StudentsController < ApplicationController
   def index_evaluation_students
     @evaluation = Evaluation.find(params[:evaluation_id])
     @students = @evaluation.students
+
     render 'students/enrolled'
+  end
+
+  def edit_evaluation_students
+    @evaluation = Evaluation.find(params[:evaluation_id])
+    @students = @evaluation.students
+
+    render 'students/calificate'
   end
 
 
@@ -67,7 +77,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       if @student.save
     #    Course.find(params[:course_id]).students << @student
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
+        format.html { redirect_to @student, notice: 'Estudiante creado' }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new }
@@ -81,7 +91,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+        format.html { redirect_to @student, notice: 'Parametros de estudiantes actualizados.' }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit }
@@ -95,7 +105,7 @@ class StudentsController < ApplicationController
   def destroy
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
+      format.html { redirect_to students_url, notice: 'Estudiante eliminado' }
       format.json { head :no_content }
     end
   end
