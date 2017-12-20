@@ -24,18 +24,15 @@
       <td><%= student.legajo %></td>
       <td><%= student.dni %></td>
       <td><%= student.evaluation_students.first.score %></td>
-      <td><%= link_to "Calificar" %></td>
+
     </tr>
   <% end %>
   </tbody>
 </table>
-        </tr>
 
-  </tbody>
-</table>
 
 
 <div class="btn-group btn-group-sm">
-  <%#= link_to 'Calificar', "", class: 'btn btn-info' %>
-  <%#= link_to 'Volver', courses_path, class: 'btn btn-danger' %>
+  <%= link_to 'Calificar a todos', edit_evaluation_students_path(@evaluation), class: 'btn btn-info'%>
+  <%= link_to 'Volver', request.referrer, class: 'btn btn-danger' %>
 </div>

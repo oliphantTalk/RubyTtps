@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'teachers/:id/miscursos' => 'teachers#my_courses', as: :my_courses
   get 'evaluation/:evaluation_id/students/:id/new' => 'students#add_student_to_evaluation', as: :new_evaluation_add_student
   get 'evaluation/:evaluation_id/students' => 'students#index_evaluation_students', :as => :index_evaluation_students
-  get 'evaluations/:evaluation_id/students/:id/edit' => 'students#edit_evaluation_students', :as => :edit_evaluation_students
+  get 'evaluations/:evaluation_id/students/calificate' => 'students#edit_evaluation_students', :as => :edit_evaluation_students
   devise_for :teachers
 
   resources :evaluations do

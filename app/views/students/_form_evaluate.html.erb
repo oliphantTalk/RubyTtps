@@ -11,7 +11,9 @@
     <th>Apellido</th>
     <th>Legajo</th>
     <th>Dni</th>
+    <th>Estado</th>
     <th>Nota</th>
+    <th>Comentarios</th>
     <th colspan="5">Opciones</th>
   </tr>
   </thead>
@@ -19,28 +21,60 @@
   <tbody>
   <% @students.each do |student| %>
     <tr>
+      <td><%= student.name %></td>
+      <td><%= student.surname %></td>
+      <td><%= student.legajo %></td>
+      <td><%= student.dni %></td>
+      <td><%=  %></td>
       <%= simple_form_for [@evaluation, student], :html => { :class => 'form-horizontal' } do |f| %>
         <%= f.error_notification %>
 
         <%= f.simple_fields_for student.evaluation_students.first  do |es| %>
-          <td><%= es.input :score, label: false %></td>
-          <td><%= es.input :comment, label: false %></td>
+          <td><%= es.input :score, hint: "Puntaje de 0 a 10, o Ausente", label: false %></td>
+          <td><%= es.input :comment, hint: "Cualquier comentario que quiera agregarse", label: false %></td>
           <%#= f.input :course_ids, :as => :hidden, class: 'form-group', :input_html => { disabled:true, :value => params[:course_id]} %>
+          <td class="form-actions form-inline"><%= f.submit 'Calificar', class: 'btn btn-warning' %></td>
 
-
-          <td> <div class="form-actions form-inline">
-            <%= f.submit 'Calificar', class: 'btn btn-info' %>
-          </div><%#= student.evaluation_students.first.score %></td>
         <% end %>
 
 
-      <% end %>
+
+
+    <% end %>
+  <%end%>
+
+    </tr>
+  </tbody>
+
+</table>
+
+<table class="table table-hover table-bordered">
+  <thead>
+  <tr>
+    <th>Fecha de evaluacion</th>
+    <th>Alumnos Inscriptos</th>
+    <th>Alumnos Aprobados</th>
+    <th>Alumnos Desaprobados</th>
+    <th>Alumnos Ausentes</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><%= @evaluation.date %></td>
+    <td><%= @evaluation.evaluation_students.count %></td>
+    <td><%=  %></td>
+    <td><%= @evaluation.date %></td>
+    <td><%= ausentes(@evaluation) %></td>
   </tr>
   </tbody>
 </table>
 
+
+
+
+
+
 <div class="btn-group btn-group-sm">
-  <%= link_to 'Calificar a todos', "", class: 'btn btn-info' %>
-  <%= link_to 'Volver', courses_path, class: 'btn btn-danger' %>
+  <%= link_to 'Volver', request.referrer, class: 'btn btn-danger' %>
 </div>
-<%end%>
+
