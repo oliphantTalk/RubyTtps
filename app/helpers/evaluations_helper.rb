@@ -19,7 +19,7 @@ module EvaluationsHelper
   end
 
   def desaprobados(evaluation)
-    evaluation.evaluation_students.where("score <= #{evaluation.min_score}").count.to_s
+    evaluation.evaluation_students.where("score BETWEEN 1 AND #{evaluation.min_score} ").count.to_s
     #EvaluationStudent.where("evaluation_id = #{evaluation.id} and score <= #{evaluation.min_score} and score <> 'Ausente'").count.to_s
   end
 
