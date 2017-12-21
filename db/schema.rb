@@ -34,19 +34,19 @@ ActiveRecord::Schema.define(version: 20171220184010) do
   create_table "courses_teachers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "course_id", null: false
     t.bigint "teacher_id", null: false
-    t.index ["course_id", "teacher_id"], name: "index_courses_teachers_on_course_id_and_teacher_id"
+    t.index %w(course_id teacher_id), name: "index_courses_teachers_on_course_id_and_teacher_id"
   end
 
   create_table "evaluation_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "evaluation_id"
     t.bigint "student_id"
-    t.date "date"
-    t.string "instance"
-    t.string "score", default: "Ausente"
+    t.date "date", default: "2017-12-20"
+    t.string "status", default: "Falta calificar"
+    t.string "score", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "comment"
-    t.index ["evaluation_id", "student_id"], name: "index_evaluation_students_on_evaluation_id_and_student_id", unique: true
+    t.index %w(evaluation_id student_id), name: "index_evaluation_students_on_evaluation_id_and_student_id", unique: true
     t.index ["evaluation_id"], name: "index_evaluation_students_on_evaluation_id"
     t.index ["student_id"], name: "index_evaluation_students_on_student_id"
   end

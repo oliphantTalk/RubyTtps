@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [ :add_student_to_evaluation, :show, :edit, :update, :destroy]
-
+  before_action :set_evaluation_student, only: [:update_calification]
   # GET /students
   # GET /students.json
   def index
@@ -28,7 +28,7 @@ class StudentsController < ApplicationController
       @student = Course.find(params[:course_id]).students.new
 
     else
-      @student = Student.build
+      @student = Student.new
       @student.evaluation_students.build
     end
 
@@ -64,6 +64,17 @@ class StudentsController < ApplicationController
     render 'students/calificate'
   end
 
+  def update_calification
+    score = params[:student][:evaluation_student][:score]
+    comment = params[:student][:evaluation_student][:comment]
+    @evaluation_student.update(:score => score, :comment => comment )
+    respond_to do |format|
+      if @evaluation_student.save
+        format.html { redirect_to request.referrer, notice: 'Parametros actualizados.' }
+        format.json { render :show, status: :ok, location: @student }
+      end
+    end
+  end
 
   # GET /students/1/edit
   def edit
@@ -114,6 +125,10 @@ class StudentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
+    end
+
+    def set_evaluation_student
+      @evaluation_student = EvaluationStudent.find_by(:evaluation_id => params[:evaluation_id], :student_id => params[:student_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

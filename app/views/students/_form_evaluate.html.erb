@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 
 <h1>Estudiantes Inscriptos</h1>
@@ -25,18 +26,24 @@
       <td><%= student.surname %></td>
       <td><%= student.legajo %></td>
       <td><%= student.dni %></td>
-      <td><%=  %></td>
-      <%= simple_form_for [@evaluation, student], :html => { :class => 'form-horizontal' } do |f| %>
+
+
+      <td><%= evaluacion(@evaluation, student).status %></td>
+
+
+      <%= simple_form_for student, url: update_evaluation_student_path(:student_id => student.id) ,:html => { :class => 'form-horizontal' } do |f| %>
         <%= f.error_notification %>
 
-        <%= f.simple_fields_for student.evaluation_students.first  do |es| %>
+        <%= f.simple_fields_for evaluacion(@evaluation, student)  do |es| %>
           <td><%= es.input :score, hint: "Puntaje de 0 a 10, o Ausente", label: false %></td>
-          <td><%= es.input :comment, hint: "Cualquier comentario que quiera agregarse", label: false %></td>
+          <td><%= es.input :comment, as: :text, hint: "Cualquier comentario que quiera agregarse", label: false %></td>
           <%#= f.input :course_ids, :as => :hidden, class: 'form-group', :input_html => { disabled:true, :value => params[:course_id]} %>
-          <td class="form-actions form-inline"><%= f.submit 'Calificar', class: 'btn btn-warning' %></td>
+
 
         <% end %>
-
+        <td class="form-actions form-inline">
+          <%= f.submit 'Calificar', class: 'btn btn-warning' %>
+        </td>
 
 
 
@@ -53,7 +60,7 @@
   <tr>
     <th>Fecha de evaluacion</th>
     <th>Alumnos Inscriptos</th>
-    <th>Alumnos Aprobados</th>
+    <th>Alumnos Aprobados/Porcentaje</th>
     <th>Alumnos Desaprobados</th>
     <th>Alumnos Ausentes</th>
   </tr>
@@ -61,9 +68,9 @@
   <tbody>
   <tr>
     <td><%= @evaluation.date %></td>
-    <td><%= @evaluation.evaluation_students.count %></td>
-    <td><%=  %></td>
-    <td><%= @evaluation.date %></td>
+    <td><%= inscriptos(@evaluation) %></td>
+    <td><%= aprobados(@evaluation) + "/" +  porcentaje_aprobados(@evaluation) +'%' %></td>
+    <td><%= desaprobados(@evaluation) %></td>
     <td><%= ausentes(@evaluation) %></td>
   </tr>
   </tbody>

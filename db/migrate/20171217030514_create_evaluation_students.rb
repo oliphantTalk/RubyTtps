@@ -8,7 +8,7 @@ class CreateEvaluationStudents < ActiveRecord::Migration[5.1]
         t.belongs_to :evaluation, index:true
         t.belongs_to :student, index:true
         t.date :date, default: Time.now
-        t.string :instance, default: ""
+        t.string :status, default: ""
         t.string :score, default: ""
 
         t.timestamps

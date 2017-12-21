@@ -18,7 +18,7 @@
       <td><%= student.name %></td>
       <td><%= student.surname %></td>
       <td><%= student.legajo %></td>
-      <% if params[:evaluation_id].present? && already_inscripted(@evaluation.id, student.id) %>
+      <% if params[:evaluation_id].present? && not_inscripted(@evaluation.id, student.id) %>
         <td><%= link_to 'Inscribir', new_evaluation_add_student_path(params[:evaluation_id], student), class: 'glyphicon glyphicon-plus' %></td>
       <% else %>
         <td><%= link_to 'Mostrar', student, class: 'glyphicon glyphicon-zoom-in' %></td>

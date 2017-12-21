@@ -13,7 +13,6 @@ class Student < ApplicationRecord
 
   before_save { self.email = email.downcase }
 
-
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :name, presence: true
   validates :surname, presence: true
@@ -23,5 +22,8 @@ class Student < ApplicationRecord
                                             uniqueness: {case_sensitive: false}
   validates :legajo, presence: true, uniqueness: true
   validates_associated :courses
+
+
+
 
 end

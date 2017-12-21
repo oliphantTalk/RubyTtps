@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'evaluation/:evaluation_id/students/:id/new' => 'students#add_student_to_evaluation', as: :new_evaluation_add_student
   get 'evaluation/:evaluation_id/students' => 'students#index_evaluation_students', :as => :index_evaluation_students
   get 'evaluations/:evaluation_id/students/calificate' => 'students#edit_evaluation_students', :as => :edit_evaluation_students
+  patch 'evaluations/:evaluation_id/student/:student_id/update' => 'students#update_calification', :as => :update_evaluation_student
   devise_for :teachers
 
   resources :evaluations do
