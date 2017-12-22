@@ -21,9 +21,9 @@
       <% if params[:evaluation_id].present? && not_inscripted(@evaluation.id, student.id) %>
         <td><%= link_to 'Inscribir', new_evaluation_add_student_path(params[:evaluation_id], student), class: 'glyphicon glyphicon-plus' %></td>
       <% else %>
-        <td><%= link_to 'Mostrar', student, class: 'glyphicon glyphicon-zoom-in' %></td>
+        <td><%= link_to 'Mostrar', course_student_path(@course, student), class: 'glyphicon glyphicon-zoom-in' %></td>
       <% end %>
-      <td><%= link_to 'Editar', edit_student_path(student), class: 'glyphicon glyphicon-pencil'%></td>
+      <td><%= link_to 'Editar', edit_course_student_path(@course, student), class: 'glyphicon glyphicon-pencil'%></td>
       <td><%= link_to 'Eliminar!', student, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'text text-danger glyphicon glyphicon-trash' %></td>
     </tr>
   <% end %>
@@ -31,6 +31,6 @@
 </table>
 
 <div class="btn-group btn-group-sm">
-  <%= link_to 'Nuevo Estudiante', new_student_path, class: 'btn btn-info' %>
+  <%= link_to 'Nuevo Estudiante', new_course_student_path(@course), class: 'btn btn-info' %>
   <%= link_to 'Volver', courses_path, class: 'btn btn-danger' %>
 </div>

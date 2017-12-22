@@ -4,9 +4,11 @@ class EvaluationsController < ApplicationController
   # GET /evaluations
   # GET /evaluations.json
   def index
-    #@evaluations = Evaluation.all
+    #
     if params[:course_id].present?
       @evaluations = Course.find(params[:course_id]).evaluations
+    else
+      @evaluations = Evaluation.all
     end
   end
 
@@ -39,7 +41,6 @@ class EvaluationsController < ApplicationController
       else
         params[:course_id] = params[:evaluation][:course_id]
         format.html { render :new, :params => params[:course_id] }
-        #format.html { redirect_to(new_course_evaluation_path(params[:evaluation][:course_id])) }
         format.json { render json: @evaluation.errors, status: :unprocessable_entity }
       end
     end

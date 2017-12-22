@@ -18,7 +18,7 @@
       <td><%= @student.email %></td>
       <td><%= @student.legajo %></td>
       <td><%= @student.dni %></td>
-      <td><%= link_to 'Editar', edit_student_path(@student), class: 'glyphicon glyphicon-pencil'%></td>
+      <td><%= link_to 'Editar', edit_course_student_path(@course, @student), class: 'glyphicon glyphicon-pencil'%></td>
       <td><%= link_to 'Eliminar!', @student, method: :delete, data: { confirm: '¿Estas seguro?' }, class: 'text text-danger glyphicon glyphicon-trash' %></td>
     </tr>
   </tbody>

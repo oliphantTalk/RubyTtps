@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220184010) do
+ActiveRecord::Schema.define(version: 20172206025914) do
 
   create_table "course_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "course_id"
@@ -34,19 +34,19 @@ ActiveRecord::Schema.define(version: 20171220184010) do
   create_table "courses_teachers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "course_id", null: false
     t.bigint "teacher_id", null: false
-    t.index %w(course_id teacher_id), name: "index_courses_teachers_on_course_id_and_teacher_id"
+    t.index ["course_id", "teacher_id"], name: "index_courses_teachers_on_course_id_and_teacher_id"
   end
 
   create_table "evaluation_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "evaluation_id"
     t.bigint "student_id"
-    t.date "date", default: "2017-12-20"
-    t.string "status", default: "Falta calificar"
+    t.date "date", default: "2017-12-22"
+    t.string "status", default: ""
     t.string "score", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "comment"
-    t.index %w(evaluation_id student_id), name: "index_evaluation_students_on_evaluation_id_and_student_id", unique: true
+    t.index ["evaluation_id", "student_id"], name: "index_evaluation_students_on_evaluation_id_and_student_id", unique: true
     t.index ["evaluation_id"], name: "index_evaluation_students_on_evaluation_id"
     t.index ["student_id"], name: "index_evaluation_students_on_student_id"
   end
@@ -61,12 +61,21 @@ ActiveRecord::Schema.define(version: 20171220184010) do
     t.index ["course_id"], name: "index_evaluations_on_course_id"
   end
 
+  create_table "evaluations_students", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "evaluation_id", null: false
+    t.bigint "student_id", null: false
+    t.date "date"
+    t.string "instance"
+    t.string "score", default: "Ausente"
+    t.index ["evaluation_id", "student_id"], name: "index_evaluations_students_on_evaluation_id_and_student_id"
+  end
+
   create_table "students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name", limit: 30
-    t.string "surname", limit: 30
-    t.integer "dni"
-    t.integer "legajo"
-    t.string "email"
+    t.string "name", limit: 30, null: false
+    t.string "surname", limit: 30, null: false
+    t.integer "dni", null: false
+    t.integer "legajo", null: false
+    t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dni"], name: "index_students_on_dni", unique: true

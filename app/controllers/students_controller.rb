@@ -1,19 +1,15 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [ :add_student_to_evaluation, :show, :edit, :update, :destroy]
   before_action :set_evaluation_student, only: [:update_calification]
+  before_action :set_course, except: [:add_student_to_evaluation]
   # GET /students
   # GET /students.json
   def index
-    if params[:course_id].present?
-#      @students = students_from_course(params[:course_id])
-    @students = Course.find(params[:course_id]).students.order(:surname, :name)
-    elsif params[:evaluation_id].present?
-          @evaluation = Evaluation.find(params[:evaluation_id])
-          @course = @evaluation.course
-          @students = @course.students
-    else
-      @students = Student.all.order(:surname, :name)
+    if params[:evaluation_id].present?
+      @evaluation = Evaluation.find(params[:evaluation_id])
+      @course = @evaluation.course
     end
+    @students = @course.students.order(:surname, :name)
   end
 
   # GET /stu
@@ -24,15 +20,10 @@ class StudentsController < ApplicationController
 
   # GET /students/new
   def new
-    if params[:course_id].present?
-      @student = Course.find(params[:course_id]).students.new
-
-    else
       @student = Student.new
-      @student.evaluation_students.build
-    end
-
+      @course.students.build
   end
+
 
   def add_student_to_evaluation
     if params[:evaluation_id].present?
@@ -83,12 +74,12 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.new(student_params)
+    @student = @course.students.new(student_params)
 
     respond_to do |format|
-      if @student.save
+      if @course.save
     #    Course.find(params[:course_id]).students << @student
-        format.html { redirect_to @student, notice: 'Estudiante creado' }
+        format.html { redirect_to course_students_path(@course), notice: 'Estudiante creado' }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new }
@@ -102,7 +93,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Parametros de estudiantes actualizados.' }
+        format.html { redirect_to course_students_path(@course), notice: 'Parametros de estudiantes actualizados.' }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit }
@@ -127,13 +118,20 @@ class StudentsController < ApplicationController
       @student = Student.find(params[:id])
     end
 
+    def set_course
+      if(params[:course_id].present?)
+        @course=Course.find(params[:course_id])
+      end
+    end
+
     def set_evaluation_student
+
       @evaluation_student = EvaluationStudent.find_by(:evaluation_id => params[:evaluation_id], :student_id => params[:student_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.fetch(:student, {})
-      params.require(:student).permit(:name, :surname, :dni, :legajo, :email, :course_ids)
+      params.require(:student).permit(:name, :surname, :dni, :legajo, :email, :course_id)
     end
 end

@@ -21,7 +21,8 @@
         <td><%= teacher.surname %></td>
         <td><%= teacher.email %></td>
         <td><%= link_to 'Mostrar Informacion', teacher %></td>
-        <td><%= link_to 'Editar Informacion', edit_teacher_path(teacher) %></td>
+        <td>
+          <%= link_to 'Editar Informacion', edit_teacher_registration_path(teacher) %></td>
         <td><%= link_to 'Cursos Asignados', my_courses_path(teacher) %></td>
       </tr>
     <% end %>
@@ -30,6 +31,6 @@
 
 <br>
 <div class="btn-group btn-group-sm">
-  <%= link_to 'Nuevo Docente', new_teacher_path, class: 'btn btn-info' %>
+  <%#= link_to 'Nuevo Docente', new_teacher_registration_path, class: 'btn btn-info' %>
 </div>
 </div>
