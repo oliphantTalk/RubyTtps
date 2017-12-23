@@ -8,19 +8,16 @@ Rails.application.routes.draw do
   devise_for :teachers
 
   resources :evaluations do
-    resources :students
+    resources :students, except: :create
   end
 
-  #resources :evaluation_students
-#  resources :evaluation_students
   resources :students
   resources :subjects
-  #resources :course_students
+
   resources :courses do
     resources :students
     resources :teachers
     resources :evaluations
-
   end
 
   resources :subjects do

@@ -14,11 +14,11 @@
 
   <tbody>
 
-  <% courses_order_by_name.each do |course| %>
+  <% @courses.each do |course| %>
     <tr>
-      <td><%= course.name %></td>
-      <td><%= course.plan %></td>
-      <td><%= course.anio %></td>
+      <td><%= course.subject.name %></td>
+      <td><%= course.subject.year %></td>
+      <td><%= course.year %></td>
       <td><%= link_to "Ver docentes", course_teachers_path(course) %></td>
       <td><%= link_to "Ver alumnos", course_students_path(course) %></td>
       <td><%= link_to "Más", course_path(course), class: 'glyphicon glyphicon-zoom-in' %></td>
@@ -31,6 +31,6 @@
 
 <div class="btn-group btn-group-sm">
   <%= link_to 'Nuevo Curso', new_course_path, class: 'btn btn-info' %>
-  <%= link_to 'Volver', courses_path, class: 'btn btn-danger' %>
+  <%= link_to 'Volver', subjects_path, class: 'btn btn-danger' %>
 </div>
 

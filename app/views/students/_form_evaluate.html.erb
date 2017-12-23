@@ -28,14 +28,17 @@
       <td><%= student.dni %></td>
 
 
-      <td><%= evaluacion(@evaluation, student).status %></td>
-
+      <td><% if evaluacion(@evaluation, student).status.blank? %>
+          <%= "Por calificar" %>
+          <% else %>
+        <%= evaluacion(@evaluation, student).status %></td>
+        <% end %>
 
       <%= simple_form_for student, url: update_evaluation_student_path(:student_id => student.id) ,:html => { :class => 'form-horizontal' } do |f| %>
         <%= f.error_notification %>
 
         <%= f.simple_fields_for evaluacion(@evaluation, student)  do |es| %>
-          <td><%= es.input :score, hint: "Puntaje de 0 a 10, o Ausente", label: false %></td>
+          <td><%= es.input :score, hint: "Puntaje de 0 a 10. 0(cero) == Ausente", label: false %></td>
           <td><%= es.input :comment, as: :text, hint: "Cualquier comentario que quiera agregarse", label: false %></td>
           <%#= f.input :course_ids, :as => :hidden, class: 'form-group', :input_html => { disabled:true, :value => params[:course_id]} %>
 
@@ -82,6 +85,6 @@
 
 
 <div class="btn-group btn-group-sm">
-  <%= link_to 'Volver', request.referrer, class: 'btn btn-danger' %>
+  <%= link_to 'Volver', course_evaluations_path(@evaluation.course), class: 'btn btn-danger' %>
 </div>
 

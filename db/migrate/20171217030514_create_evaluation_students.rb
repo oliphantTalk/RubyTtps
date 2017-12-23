@@ -1,6 +1,6 @@
 class CreateEvaluationStudents < ActiveRecord::Migration[5.1]
   def change
-    drop_join_table :evaluations, :students, table_name: 'evaluation_students'
+#    drop_join_table :evaluations, :students, table_name: 'evaluation_students'
 
     create_table :evaluation_students do |t|
         #t.references :course, foreign_key: true

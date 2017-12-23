@@ -5,9 +5,12 @@ class EvaluationStudent < ApplicationRecord
   after_update :update_status
 
    validates :status, inclusion: { in: ["Aprobado", "Desaprobado", "Por calificar", "Ausente", ""] }
- # validates :score, inclusion: { in: 0..10 }
-   validates_inclusion_of :score, :in => 0..10
+   validates_inclusion_of :score, :in => 0..10, :if => :score?
 
+
+  def score?
+    self.score
+  end
 
 
   def estado_examen

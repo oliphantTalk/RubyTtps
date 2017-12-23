@@ -1,15 +1,10 @@
 class Evaluation < ApplicationRecord
   belongs_to :course
-  #has_and_belongs_to_many :students
-  has_many :evaluation_students
-  has_many :students, through: :evaluation_students
-
-
-  ##########VALIDACIONES
+  has_many :evaluation_students, dependent: :destroy
+  has_many :students, through: :evaluation_students, dependent: :destroy
 
   validates :title, presence: true
-#  validates :amount, presence: true, numericality: {:greater_than_or_equal_to => 0}
   validates :min_score, presence: true, numericality: {:greater_than_or_equal_to => 0}
-  validates :date, presence: true #Agregar un chequeo de fecha que corresponda segun el año de cursada.
-  # ########################
+  validates :date, presence: true
+  #Agregar un chequeo de fecha que corresponda segun el año de cursada.
 end

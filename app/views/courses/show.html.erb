@@ -9,7 +9,7 @@
   </thead>
 
   <tbody>
-  <li>
+
     <td><%= @course.subject.name %></td>
     <td><%= @course.year %></td>
 
@@ -48,7 +48,7 @@
 </table>
 <div class="btn-group btn-group-sm">
 
-  <%= link_to 'Volver', courses_path %>
+  <%= link_to 'Volver', request.referrer %>
 </div>
 
 

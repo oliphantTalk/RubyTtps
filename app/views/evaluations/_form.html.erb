@@ -6,8 +6,6 @@
     <%= f.input :date, required: true, label: "Fecha de examen", input_html: {placeholder: Time.now}%>
     <%= f.input :min_score, required: true, label: "Nota minima de aprobacion", input_html: {value: 4} %>
     <%= f.association :course, :as => :hidden, input_html: {value: params[:course_id]}%>
-    <%#= f.input :students, collection: Student.all, input_html: { multiple: true }
-    %>
   </div>
 
   <div class="form-actions form-inline">
